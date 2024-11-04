@@ -45,9 +45,64 @@ class HomePage(ttk.Frame):
         )
         canvas.pack(fill='both', expand=True)
 
-        # Load images
+        # Header
         self.header = PhotoImage(file=relative_to_assets("header.png"))
         canvas.create_image(500.0, 37.0, image=self.header)
+        # Navigation buttons
+        self.log_button = PhotoImage(file=relative_to_assets("log_Button.png"))
+        logButton = Button(
+            self,
+            image=self.log_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(LogPage),
+            relief="flat"
+        )
+        logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
+
+        self.speed_button = PhotoImage(file=relative_to_assets("speed_Button.png"))
+        speedButton = Button(
+            self,
+            image=self.speed_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(SpeedPage),
+            relief="flat"
+        )
+        speedButton.place(x=166.0, y=32.0, width=116.0, height=38.0)
+
+        self.acceleration_button = PhotoImage(file=relative_to_assets("acceleration_Button.png"))
+        accelerationButton = Button(
+            self,
+            image=self.acceleration_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(AccelerationPage),
+            relief="flat"
+        )
+        accelerationButton.place(x=307.0, y=32.0, width=175.0, height=38.0)
+
+        self.temperature_button = PhotoImage(file=relative_to_assets("temp_Button.png"))
+        temperatureButton = Button(
+            self,
+            image=self.temperature_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(TemperaturePage),
+            relief="flat"
+        )
+        temperatureButton.place(x=507.0, y=32.0, width=175.0, height=38.0)
+
+        self.strain_button = PhotoImage(file=relative_to_assets("strainGauge_Button.png"))
+        strainButton = Button(
+            self,
+            image=self.strain_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(StrainGaugePage),
+            relief="flat"
+        )
+        strainButton.place(x=707.0, y=32.0, width=175.0, height=38.0)
 
 
         # Add images and text to the canvas
@@ -60,6 +115,7 @@ class HomePage(ttk.Frame):
         self.image_image_5 = PhotoImage(file=relative_to_assets("image_5.png"))
         canvas.create_image(428.0, 440.0, image=self.image_image_5)
 
+        #Text labels
         canvas.create_text(228.0, 331.0, anchor="nw", text="Acceleration", fill="#FFFFFF", font=("InriaSans Bold", 16 * -1))
         canvas.create_text(213.0, 134.0, anchor="nw", text="Speed", fill="#FFFFFF", font=("InriaSans Bold", 16 * -1))
         canvas.create_text(654.0, 75.0, anchor="nw", text="Strain Gauges", fill="#FFFFFF", font=("InriaSans Bold", 16 * -1))
@@ -118,6 +174,26 @@ class HomePage(ttk.Frame):
         clear_button.place(x=433.0, y=84.0, width=175.0, height=50.0)
 
 
+
+        
+
+class LogPage(ttk.Frame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+        canvas = Canvas(
+            self,
+            bg="#CF4420",
+            height=550,
+            width=1000,
+            bd=0,
+            highlightthickness=0,
+            relief="ridge"
+        )
+        canvas.pack(fill='both', expand=True)
+
+        # Header
+        self.header = PhotoImage(file=relative_to_assets("header.png"))
+        canvas.create_image(500.0, 37.0, image=self.header)
         # Navigation buttons
         self.log_button = PhotoImage(file=relative_to_assets("log_Button.png"))
         logButton = Button(
@@ -175,11 +251,6 @@ class HomePage(ttk.Frame):
         strainButton.place(x=707.0, y=32.0, width=175.0, height=38.0)
 
 
-        
-
-class LogPage(ttk.Frame):
-    def __init__(self, parent, controller):
-        super().__init__(parent)
         label = ttk.Label(self, text="This is Page One", font=("Helvetica", 16))
         label.pack(pady=10)
 
@@ -190,6 +261,77 @@ class LogPage(ttk.Frame):
 class SpeedPage(ttk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
+        canvas = Canvas(
+            self,
+            bg="#CF4420",
+            height=550,
+            width=1000,
+            bd=0,
+            highlightthickness=0,
+            relief="ridge"
+        )
+        canvas.pack(fill='both', expand=True)
+
+        # Header
+        self.header = PhotoImage(file=relative_to_assets("header.png"))
+        canvas.create_image(500.0, 37.0, image=self.header)
+        # Navigation buttons
+        self.log_button = PhotoImage(file=relative_to_assets("log_Button.png"))
+        logButton = Button(
+            self,
+            image=self.log_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(LogPage),
+            relief="flat"
+        )
+        logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
+
+        self.speed_button = PhotoImage(file=relative_to_assets("speed_Button.png"))
+        speedButton = Button(
+            self,
+            image=self.speed_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(SpeedPage),
+            relief="flat"
+        )
+        speedButton.place(x=166.0, y=32.0, width=116.0, height=38.0)
+
+        self.acceleration_button = PhotoImage(file=relative_to_assets("acceleration_Button.png"))
+        accelerationButton = Button(
+            self,
+            image=self.acceleration_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(AccelerationPage),
+            relief="flat"
+        )
+        accelerationButton.place(x=307.0, y=32.0, width=175.0, height=38.0)
+
+        self.temperature_button = PhotoImage(file=relative_to_assets("temp_Button.png"))
+        temperatureButton = Button(
+            self,
+            image=self.temperature_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(TemperaturePage),
+            relief="flat"
+        )
+        temperatureButton.place(x=507.0, y=32.0, width=175.0, height=38.0)
+
+        self.strain_button = PhotoImage(file=relative_to_assets("strainGauge_Button.png"))
+        strainButton = Button(
+            self,
+            image=self.strain_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(StrainGaugePage),
+            relief="flat"
+        )
+        strainButton.place(x=707.0, y=32.0, width=175.0, height=38.0)
+
+
         label = ttk.Label(self, text="This is Page Two", font=("Helvetica", 16))
         label.pack(pady=10)
 
@@ -200,6 +342,77 @@ class SpeedPage(ttk.Frame):
 class AccelerationPage(ttk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
+        canvas = Canvas(
+            self,
+            bg="#CF4420",
+            height=550,
+            width=1000,
+            bd=0,
+            highlightthickness=0,
+            relief="ridge"
+        )
+        canvas.pack(fill='both', expand=True)
+
+        # Header
+        self.header = PhotoImage(file=relative_to_assets("header.png"))
+        canvas.create_image(500.0, 37.0, image=self.header)
+        # Navigation buttons
+        self.log_button = PhotoImage(file=relative_to_assets("log_Button.png"))
+        logButton = Button(
+            self,
+            image=self.log_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(LogPage),
+            relief="flat"
+        )
+        logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
+
+        self.speed_button = PhotoImage(file=relative_to_assets("speed_Button.png"))
+        speedButton = Button(
+            self,
+            image=self.speed_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(SpeedPage),
+            relief="flat"
+        )
+        speedButton.place(x=166.0, y=32.0, width=116.0, height=38.0)
+
+        self.acceleration_button = PhotoImage(file=relative_to_assets("acceleration_Button.png"))
+        accelerationButton = Button(
+            self,
+            image=self.acceleration_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(AccelerationPage),
+            relief="flat"
+        )
+        accelerationButton.place(x=307.0, y=32.0, width=175.0, height=38.0)
+
+        self.temperature_button = PhotoImage(file=relative_to_assets("temp_Button.png"))
+        temperatureButton = Button(
+            self,
+            image=self.temperature_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(TemperaturePage),
+            relief="flat"
+        )
+        temperatureButton.place(x=507.0, y=32.0, width=175.0, height=38.0)
+
+        self.strain_button = PhotoImage(file=relative_to_assets("strainGauge_Button.png"))
+        strainButton = Button(
+            self,
+            image=self.strain_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(StrainGaugePage),
+            relief="flat"
+        )
+        strainButton.place(x=707.0, y=32.0, width=175.0, height=38.0)
+
+
         label = ttk.Label(self, text="This is Page Two", font=("Helvetica", 16))
         label.pack(pady=10)
 
@@ -210,6 +423,76 @@ class AccelerationPage(ttk.Frame):
 class TemperaturePage(ttk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
+        canvas = Canvas(
+            self,
+            bg="#CF4420",
+            height=550,
+            width=1000,
+            bd=0,
+            highlightthickness=0,
+            relief="ridge"
+        )
+        canvas.pack(fill='both', expand=True)
+
+        # Header
+        self.header = PhotoImage(file=relative_to_assets("header.png"))
+        canvas.create_image(500.0, 37.0, image=self.header)
+        # Navigation buttons
+        self.log_button = PhotoImage(file=relative_to_assets("log_Button.png"))
+        logButton = Button(
+            self,
+            image=self.log_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(LogPage),
+            relief="flat"
+        )
+        logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
+
+        self.speed_button = PhotoImage(file=relative_to_assets("speed_Button.png"))
+        speedButton = Button(
+            self,
+            image=self.speed_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(SpeedPage),
+            relief="flat"
+        )
+        speedButton.place(x=166.0, y=32.0, width=116.0, height=38.0)
+
+        self.acceleration_button = PhotoImage(file=relative_to_assets("acceleration_Button.png"))
+        accelerationButton = Button(
+            self,
+            image=self.acceleration_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(AccelerationPage),
+            relief="flat"
+        )
+        accelerationButton.place(x=307.0, y=32.0, width=175.0, height=38.0)
+
+        self.temperature_button = PhotoImage(file=relative_to_assets("temp_Button.png"))
+        temperatureButton = Button(
+            self,
+            image=self.temperature_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(TemperaturePage),
+            relief="flat"
+        )
+        temperatureButton.place(x=507.0, y=32.0, width=175.0, height=38.0)
+
+        self.strain_button = PhotoImage(file=relative_to_assets("strainGauge_Button.png"))
+        strainButton = Button(
+            self,
+            image=self.strain_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(StrainGaugePage),
+            relief="flat"
+        )
+        strainButton.place(x=707.0, y=32.0, width=175.0, height=38.0)
+
         label = ttk.Label(self, text="This is Page Two", font=("Helvetica", 16))
         label.pack(pady=10)
 
@@ -220,6 +503,76 @@ class TemperaturePage(ttk.Frame):
 class StrainGaugePage(ttk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
+        canvas = Canvas(
+            self,
+            bg="#CF4420",
+            height=550,
+            width=1000,
+            bd=0,
+            highlightthickness=0,
+            relief="ridge"
+        )
+        canvas.pack(fill='both', expand=True)
+
+        # Header
+        self.header = PhotoImage(file=relative_to_assets("header.png"))
+        canvas.create_image(500.0, 37.0, image=self.header)
+        # Navigation buttons
+        self.log_button = PhotoImage(file=relative_to_assets("log_Button.png"))
+        logButton = Button(
+            self,
+            image=self.log_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(LogPage),
+            relief="flat"
+        )
+        logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
+
+        self.speed_button = PhotoImage(file=relative_to_assets("speed_Button.png"))
+        speedButton = Button(
+            self,
+            image=self.speed_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(SpeedPage),
+            relief="flat"
+        )
+        speedButton.place(x=166.0, y=32.0, width=116.0, height=38.0)
+
+        self.acceleration_button = PhotoImage(file=relative_to_assets("acceleration_Button.png"))
+        accelerationButton = Button(
+            self,
+            image=self.acceleration_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(AccelerationPage),
+            relief="flat"
+        )
+        accelerationButton.place(x=307.0, y=32.0, width=175.0, height=38.0)
+
+        self.temperature_button = PhotoImage(file=relative_to_assets("temp_Button.png"))
+        temperatureButton = Button(
+            self,
+            image=self.temperature_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(TemperaturePage),
+            relief="flat"
+        )
+        temperatureButton.place(x=507.0, y=32.0, width=175.0, height=38.0)
+
+        self.strain_button = PhotoImage(file=relative_to_assets("strainGauge_Button.png"))
+        strainButton = Button(
+            self,
+            image=self.strain_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(StrainGaugePage),
+            relief="flat"
+        )
+        strainButton.place(x=707.0, y=32.0, width=175.0, height=38.0)
+
         label = ttk.Label(self, text="This is Page Two", font=("Helvetica", 16))
         label.pack(pady=10)
 
