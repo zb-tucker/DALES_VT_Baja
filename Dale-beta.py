@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk, Canvas, Button, PhotoImage
 
 OUTPUT_PATH = Path(__file__).parent
-ASSETS_PATH = OUTPUT_PATH / Path(r"/Users/ryanheiss/Documents/DALES_VT_Baja/assets")
+ASSETS_PATH = Path(__file__).resolve().parent / "assets"
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
@@ -219,6 +219,18 @@ class LogPage(ttk.Frame):
         )
         logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
 
+        # Navigation buttons
+        self.log_button = PhotoImage(file=relative_to_assets("log_Button.png"))
+        logButton = Button(
+            self,
+            image=self.log_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(LogPage),
+            relief="flat"
+        )
+        logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
+
         self.speed_button = PhotoImage(file=relative_to_assets("speed_Button.png"))
         speedButton = Button(
             self,
@@ -228,7 +240,7 @@ class LogPage(ttk.Frame):
             command=lambda: controller.show_frame(SpeedPage),
             relief="flat"
         )
-        speedButton.place(x=166.0, y=32.0, width=116.0, height=38.0)
+        speedButton.place(x=155.0, y=32.0, width=116.0, height=38.0)
 
         self.acceleration_button = PhotoImage(file=relative_to_assets("acceleration_Button.png"))
         accelerationButton = Button(
@@ -239,7 +251,7 @@ class LogPage(ttk.Frame):
             command=lambda: controller.show_frame(AccelerationPage),
             relief="flat"
         )
-        accelerationButton.place(x=307.0, y=32.0, width=175.0, height=38.0)
+        accelerationButton.place(x=296.0, y=32.0, width=175.0, height=38.0)
 
         self.temperature_button = PhotoImage(file=relative_to_assets("temp_Button.png"))
         temperatureButton = Button(
@@ -250,7 +262,7 @@ class LogPage(ttk.Frame):
             command=lambda: controller.show_frame(TemperaturePage),
             relief="flat"
         )
-        temperatureButton.place(x=507.0, y=32.0, width=175.0, height=38.0)
+        temperatureButton.place(x=485.0, y=32.0, width=175.0, height=38.0)
 
         self.strain_button = PhotoImage(file=relative_to_assets("strainGauge_Button.png"))
         strainButton = Button(
@@ -261,15 +273,18 @@ class LogPage(ttk.Frame):
             command=lambda: controller.show_frame(StrainGaugePage),
             relief="flat"
         )
-        strainButton.place(x=707.0, y=32.0, width=175.0, height=38.0)
+        strainButton.place(x=674.0, y=32.0, width=175.0, height=38.0)
 
-
-        label = ttk.Label(self, text="This is Page One", font=("Helvetica", 16))
-        label.pack(pady=10)
-
-        button = ttk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(HomePage))
-        button.pack()
+        self.main_button = PhotoImage(file=relative_to_assets("main_Button.png"))
+        mainButton = Button(
+            self,
+            image=self.main_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(HomePage),
+            relief="flat"
+        )
+        mainButton.place(x=863.0, y=32.0, width=116.0, height=38.0)
 
 class SpeedPage(ttk.Frame):
     def __init__(self, parent, controller):
@@ -300,6 +315,18 @@ class SpeedPage(ttk.Frame):
         )
         logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
 
+        # Navigation buttons
+        self.log_button = PhotoImage(file=relative_to_assets("log_Button.png"))
+        logButton = Button(
+            self,
+            image=self.log_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(LogPage),
+            relief="flat"
+        )
+        logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
+
         self.speed_button = PhotoImage(file=relative_to_assets("speed_Button.png"))
         speedButton = Button(
             self,
@@ -309,7 +336,7 @@ class SpeedPage(ttk.Frame):
             command=lambda: controller.show_frame(SpeedPage),
             relief="flat"
         )
-        speedButton.place(x=166.0, y=32.0, width=116.0, height=38.0)
+        speedButton.place(x=155.0, y=32.0, width=116.0, height=38.0)
 
         self.acceleration_button = PhotoImage(file=relative_to_assets("acceleration_Button.png"))
         accelerationButton = Button(
@@ -320,7 +347,7 @@ class SpeedPage(ttk.Frame):
             command=lambda: controller.show_frame(AccelerationPage),
             relief="flat"
         )
-        accelerationButton.place(x=307.0, y=32.0, width=175.0, height=38.0)
+        accelerationButton.place(x=296.0, y=32.0, width=175.0, height=38.0)
 
         self.temperature_button = PhotoImage(file=relative_to_assets("temp_Button.png"))
         temperatureButton = Button(
@@ -331,7 +358,7 @@ class SpeedPage(ttk.Frame):
             command=lambda: controller.show_frame(TemperaturePage),
             relief="flat"
         )
-        temperatureButton.place(x=507.0, y=32.0, width=175.0, height=38.0)
+        temperatureButton.place(x=485.0, y=32.0, width=175.0, height=38.0)
 
         self.strain_button = PhotoImage(file=relative_to_assets("strainGauge_Button.png"))
         strainButton = Button(
@@ -342,7 +369,7 @@ class SpeedPage(ttk.Frame):
             command=lambda: controller.show_frame(StrainGaugePage),
             relief="flat"
         )
-        strainButton.place(x=707.0, y=32.0, width=175.0, height=38.0)
+        strainButton.place(x=674.0, y=32.0, width=175.0, height=38.0)
 
         self.main_button = PhotoImage(file=relative_to_assets("main_Button.png"))
         mainButton = Button(
@@ -355,13 +382,6 @@ class SpeedPage(ttk.Frame):
         )
         mainButton.place(x=863.0, y=32.0, width=116.0, height=38.0)
 
-
-        label = ttk.Label(self, text="This is Page Two", font=("Helvetica", 16))
-        label.pack(pady=10)
-
-        button = ttk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(HomePage))
-        button.pack()
 
 class AccelerationPage(ttk.Frame):
     def __init__(self, parent, controller):
@@ -392,6 +412,18 @@ class AccelerationPage(ttk.Frame):
         )
         logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
 
+        # Navigation buttons
+        self.log_button = PhotoImage(file=relative_to_assets("log_Button.png"))
+        logButton = Button(
+            self,
+            image=self.log_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(LogPage),
+            relief="flat"
+        )
+        logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
+
         self.speed_button = PhotoImage(file=relative_to_assets("speed_Button.png"))
         speedButton = Button(
             self,
@@ -401,7 +433,7 @@ class AccelerationPage(ttk.Frame):
             command=lambda: controller.show_frame(SpeedPage),
             relief="flat"
         )
-        speedButton.place(x=166.0, y=32.0, width=116.0, height=38.0)
+        speedButton.place(x=155.0, y=32.0, width=116.0, height=38.0)
 
         self.acceleration_button = PhotoImage(file=relative_to_assets("acceleration_Button.png"))
         accelerationButton = Button(
@@ -412,7 +444,7 @@ class AccelerationPage(ttk.Frame):
             command=lambda: controller.show_frame(AccelerationPage),
             relief="flat"
         )
-        accelerationButton.place(x=307.0, y=32.0, width=175.0, height=38.0)
+        accelerationButton.place(x=296.0, y=32.0, width=175.0, height=38.0)
 
         self.temperature_button = PhotoImage(file=relative_to_assets("temp_Button.png"))
         temperatureButton = Button(
@@ -423,7 +455,7 @@ class AccelerationPage(ttk.Frame):
             command=lambda: controller.show_frame(TemperaturePage),
             relief="flat"
         )
-        temperatureButton.place(x=507.0, y=32.0, width=175.0, height=38.0)
+        temperatureButton.place(x=485.0, y=32.0, width=175.0, height=38.0)
 
         self.strain_button = PhotoImage(file=relative_to_assets("strainGauge_Button.png"))
         strainButton = Button(
@@ -434,7 +466,7 @@ class AccelerationPage(ttk.Frame):
             command=lambda: controller.show_frame(StrainGaugePage),
             relief="flat"
         )
-        strainButton.place(x=707.0, y=32.0, width=175.0, height=38.0)
+        strainButton.place(x=674.0, y=32.0, width=175.0, height=38.0)
 
         self.main_button = PhotoImage(file=relative_to_assets("main_Button.png"))
         mainButton = Button(
@@ -446,14 +478,6 @@ class AccelerationPage(ttk.Frame):
             relief="flat"
         )
         mainButton.place(x=863.0, y=32.0, width=116.0, height=38.0)
-
-
-        label = ttk.Label(self, text="This is Page Two", font=("Helvetica", 16))
-        label.pack(pady=10)
-
-        button = ttk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(HomePage))
-        button.pack()
 
 class TemperaturePage(ttk.Frame):
     def __init__(self, parent, controller):
@@ -484,6 +508,18 @@ class TemperaturePage(ttk.Frame):
         )
         logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
 
+        # Navigation buttons
+        self.log_button = PhotoImage(file=relative_to_assets("log_Button.png"))
+        logButton = Button(
+            self,
+            image=self.log_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(LogPage),
+            relief="flat"
+        )
+        logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
+
         self.speed_button = PhotoImage(file=relative_to_assets("speed_Button.png"))
         speedButton = Button(
             self,
@@ -493,7 +529,7 @@ class TemperaturePage(ttk.Frame):
             command=lambda: controller.show_frame(SpeedPage),
             relief="flat"
         )
-        speedButton.place(x=166.0, y=32.0, width=116.0, height=38.0)
+        speedButton.place(x=155.0, y=32.0, width=116.0, height=38.0)
 
         self.acceleration_button = PhotoImage(file=relative_to_assets("acceleration_Button.png"))
         accelerationButton = Button(
@@ -504,7 +540,7 @@ class TemperaturePage(ttk.Frame):
             command=lambda: controller.show_frame(AccelerationPage),
             relief="flat"
         )
-        accelerationButton.place(x=307.0, y=32.0, width=175.0, height=38.0)
+        accelerationButton.place(x=296.0, y=32.0, width=175.0, height=38.0)
 
         self.temperature_button = PhotoImage(file=relative_to_assets("temp_Button.png"))
         temperatureButton = Button(
@@ -515,7 +551,7 @@ class TemperaturePage(ttk.Frame):
             command=lambda: controller.show_frame(TemperaturePage),
             relief="flat"
         )
-        temperatureButton.place(x=507.0, y=32.0, width=175.0, height=38.0)
+        temperatureButton.place(x=485.0, y=32.0, width=175.0, height=38.0)
 
         self.strain_button = PhotoImage(file=relative_to_assets("strainGauge_Button.png"))
         strainButton = Button(
@@ -526,7 +562,7 @@ class TemperaturePage(ttk.Frame):
             command=lambda: controller.show_frame(StrainGaugePage),
             relief="flat"
         )
-        strainButton.place(x=707.0, y=32.0, width=175.0, height=38.0)
+        strainButton.place(x=674.0, y=32.0, width=175.0, height=38.0)
 
         self.main_button = PhotoImage(file=relative_to_assets("main_Button.png"))
         mainButton = Button(
@@ -538,13 +574,6 @@ class TemperaturePage(ttk.Frame):
             relief="flat"
         )
         mainButton.place(x=863.0, y=32.0, width=116.0, height=38.0)
-
-        label = ttk.Label(self, text="This is Page Two", font=("Helvetica", 16))
-        label.pack(pady=10)
-
-        button = ttk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(HomePage))
-        button.pack()
 
 class StrainGaugePage(ttk.Frame):
     def __init__(self, parent, controller):
@@ -575,6 +604,18 @@ class StrainGaugePage(ttk.Frame):
         )
         logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
 
+        # Navigation buttons
+        self.log_button = PhotoImage(file=relative_to_assets("log_Button.png"))
+        logButton = Button(
+            self,
+            image=self.log_button,
+            borderwidth=0,
+            highlightthickness=0,
+            command=lambda: controller.show_frame(LogPage),
+            relief="flat"
+        )
+        logButton.place(x=25.0, y=32.0, width=116.0, height=38.0)
+
         self.speed_button = PhotoImage(file=relative_to_assets("speed_Button.png"))
         speedButton = Button(
             self,
@@ -584,7 +625,7 @@ class StrainGaugePage(ttk.Frame):
             command=lambda: controller.show_frame(SpeedPage),
             relief="flat"
         )
-        speedButton.place(x=166.0, y=32.0, width=116.0, height=38.0)
+        speedButton.place(x=155.0, y=32.0, width=116.0, height=38.0)
 
         self.acceleration_button = PhotoImage(file=relative_to_assets("acceleration_Button.png"))
         accelerationButton = Button(
@@ -595,7 +636,7 @@ class StrainGaugePage(ttk.Frame):
             command=lambda: controller.show_frame(AccelerationPage),
             relief="flat"
         )
-        accelerationButton.place(x=307.0, y=32.0, width=175.0, height=38.0)
+        accelerationButton.place(x=296.0, y=32.0, width=175.0, height=38.0)
 
         self.temperature_button = PhotoImage(file=relative_to_assets("temp_Button.png"))
         temperatureButton = Button(
@@ -606,7 +647,7 @@ class StrainGaugePage(ttk.Frame):
             command=lambda: controller.show_frame(TemperaturePage),
             relief="flat"
         )
-        temperatureButton.place(x=507.0, y=32.0, width=175.0, height=38.0)
+        temperatureButton.place(x=485.0, y=32.0, width=175.0, height=38.0)
 
         self.strain_button = PhotoImage(file=relative_to_assets("strainGauge_Button.png"))
         strainButton = Button(
@@ -617,7 +658,7 @@ class StrainGaugePage(ttk.Frame):
             command=lambda: controller.show_frame(StrainGaugePage),
             relief="flat"
         )
-        strainButton.place(x=707.0, y=32.0, width=175.0, height=38.0)
+        strainButton.place(x=674.0, y=32.0, width=175.0, height=38.0)
 
         self.main_button = PhotoImage(file=relative_to_assets("main_Button.png"))
         mainButton = Button(
@@ -628,14 +669,7 @@ class StrainGaugePage(ttk.Frame):
             command=lambda: controller.show_frame(HomePage),
             relief="flat"
         )
-        mainButton.place(x=863.0, y=32.0, width=116.0, height=38.0)
-
-        label = ttk.Label(self, text="This is Page Two", font=("Helvetica", 16))
-        label.pack(pady=10)
-
-        button = ttk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(HomePage))
-        button.pack()  
+        mainButton.place(x=863.0, y=32.0, width=116.0, height=38.0)  
 
 
 
