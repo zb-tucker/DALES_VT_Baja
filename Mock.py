@@ -81,13 +81,24 @@ class Page1(BasePage):
 
         #label and its positioning
         label = ttk.Label(self, text="This is Page 1")
-        label.grid(row=0, column=0, columnspan=10, pady=10, sticky="nsew")
+
+        widget = tk.Canvas(self, width=50, height=50, bg='black', highlightthickness=0) 
+        widget.grid(row=0, column=0, padx=5, pady=5)
         
+        widget = ttk.Label(self, text=f"| 1 |")
+        widget.grid(row = 1, column = 1)
+
+        widget = ttk.Label(self, text=f"| 2 |")
+        widget.grid(row = 2, column = 2)
+
+        widget = ttk.Label(self, text=f"| 3 |")
+        widget.grid(row = 3, column = 3)
+    
         # placeholders in 10x10 grid 
-        for row in range(10): 
-            for col in range(10): 
-                widget = ttk.Label(self, text=f"R{row+1} C{col+1}")
-                widget.grid(row=row+1, column=col, padx=5, pady=5, sticky="nsew")
+        #for row in range(10): 
+            #for col in range(10): 
+                #widget = ttk.Label(self, text=f"R{row+1} C{col+1}")
+                #widget.grid(row=row+1, column=col, padx=5, pady=5, sticky="nsew")
 
 #page 2
 class Page2(BasePage):
