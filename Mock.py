@@ -11,7 +11,7 @@ class DalePositioning(tk.Tk):
         #start as half screen size
         screen_width = self.winfo_screenwidth()
         screen_height = self.winfo_screenheight()
-        self.geometry(f"{screen_width//2}x{screen_height//2}")
+        self.geometry(f"{screen_width//2}x{(screen_height)//2}")
 
         #binds configure event to on_resize
         self.bind("<Configure>", self.on_resize)
@@ -58,19 +58,26 @@ class BasePage(ttk.Frame):
     # creates a header that stretches horizontally
     def create_header(self):
         header_frame = ttk.Frame(self)
-        header_frame.grid(row=0, column=0, columnspan=10, sticky="nsew")  # Use grid instead of pack
+        header_frame.grid(row=0, column=0, columnspan=10, sticky="nsew", pady=1)  # Use grid instead of pack
 
         # for each page, creates a button in the header
         for i, page in enumerate(("Page1", "Page2", "Page3", "Page4", "Page5", "Page6")):
             button = ttk.Button(header_frame, text=f"Go to {page}",
                                 command=lambda p=page: self.controller.show_frame(p))
-            button.grid(row=0, column=i, sticky="ew")  # Use grid instead of pack
+            button.grid(row=0, column=i, sticky="nsew", padx=3, pady=3)  # Use grid instead of pack
 
-    # creates a 10x10 grid
+    # creates a 10x10 grid for positioning
     def create_grid(self):
         for i in range(10):
-            self.grid_columnconfigure(i, weight=1)
-            self.grid_rowconfigure(i, weight=1)
+            self.grid_columnconfigure(i, weight=1, minsize=33)
+            self.grid_rowconfigure(i, weight=1, minsize=33)
+
+    def get_color(self, row, col): 
+        # Generate a color based on row and column 
+        r = (row * 25) % 256 # Generate a red value between 0-255 
+        g = (col * 25) % 256 # Generate a green value between 0-255 
+        b = ((row + col) * 10) % 256 # Generate a blue value between 0-255 
+        return f'#{r:02x}{g:02x}{b:02x}'
 
 
 
@@ -80,20 +87,18 @@ class Page1(BasePage):
         super().__init__(parent, controller)
 
         #label and its positioning
-        label = ttk.Label(self, text="This is Page 1")
+        #label = ttk.Label(self, text="This is Page 1")
+        for row in range(10): 
+            for col in range(10): 
+                color = self.get_color(row, col)
+                widget = tk.Canvas(self, width=50, height=50, bg=color, highlightthickness=0) 
+                widget.grid(row=row+1, column=col, padx=3, pady=3, sticky="nsew") 
+                
+        # Configure the rows and columns to be expandable 
+        for i in range(10): 
+            self.grid_rowconfigure(i+2, weight=1) 
+            self.grid_columnconfigure(i, weight=1)
 
-        widget = tk.Canvas(self, width=50, height=50, bg='black', highlightthickness=0) 
-        widget.grid(row=0, column=0, padx=5, pady=5)
-        
-        widget = ttk.Label(self, text=f"| 1 |")
-        widget.grid(row = 1, column = 1)
-
-        widget = ttk.Label(self, text=f"| 2 |")
-        widget.grid(row = 2, column = 2)
-
-        widget = ttk.Label(self, text=f"| 3 |")
-        widget.grid(row = 3, column = 3)
-    
         # placeholders in 10x10 grid 
         #for row in range(10): 
             #for col in range(10): 
