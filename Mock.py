@@ -72,6 +72,11 @@ class BasePage(ttk.Frame):
             self.grid_columnconfigure(i, weight=1, minsize=33)
             self.grid_rowconfigure(i, weight=1, minsize=33)
 
+        # Configure the rows and columns to be expandable
+        for i in range(10): 
+            self.grid_rowconfigure(i+2, weight=1) 
+            self.grid_columnconfigure(i, weight=1)
+
     def get_color(self, row, col): 
         # Generate a color based on row and column 
         r = (row * 25) % 256 # Generate a red value between 0-255 
@@ -88,6 +93,7 @@ class Page1(BasePage):
 
         #label and its positioning
         #label = ttk.Label(self, text="This is Page 1")
+
         for row in range(10): 
             for col in range(10): 
                 color = self.get_color(row, col)
@@ -95,9 +101,9 @@ class Page1(BasePage):
                 widget.grid(row=row+1, column=col, padx=3, pady=3, sticky="nsew") 
                 
         # Configure the rows and columns to be expandable 
-        for i in range(10): 
-            self.grid_rowconfigure(i+2, weight=1) 
-            self.grid_columnconfigure(i, weight=1)
+        #for i in range(10): 
+            #self.grid_rowconfigure(i+2, weight=1) 
+            #self.grid_columnconfigure(i, weight=1)
 
         # placeholders in 10x10 grid 
         #for row in range(10): 
@@ -109,16 +115,35 @@ class Page1(BasePage):
 class Page2(BasePage):
     def __init__(self, parent, controller):
         super().__init__(parent, controller)
-
-        #label and positioning
-        label = ttk.Label(self, text="This is Page 2")
-        label.grid(row=0, column=0, columnspan=10, pady=10, sticky="nsew")
         
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+
         # placeholders in 10x10 grid 
-        for row in range(10): 
-            for col in range(10): 
-                widget = ttk.Label(self, text=f"R{row+1} C{col+1}") 
-                widget.grid(row=row+1, column=col, padx=5, pady=5, sticky="nsew")
+        widget = tk.Canvas(self, width=screen_width/3, height=screen_height/3, bg="black", highlightthickness=0) 
+        widget.grid(row=5, column=5) 
+
+        widget = tk.Canvas(self, width=5, height=5, bg="black", highlightthickness=0) 
+        widget.grid(row=1, column=2, sticky="nsew") 
+
+        widget = tk.Canvas(self, width=5, height=5, bg="black", highlightthickness=0) 
+        widget.grid(row=3, column=2, sticky="nsew") 
+
+        widget = tk.Canvas(self, width=5, height=5, bg="black", highlightthickness=0) 
+        widget.grid(row=2, column=1, sticky="nsew") 
+
+        widget = tk.Canvas(self, width=5, height=5, bg="black", highlightthickness=0) 
+        widget.grid(row=2, column=3, sticky="nsew") 
+
+        widget = tk.Canvas(self, width=11, height=11, bg="red", highlightthickness=0) 
+        widget.grid(row=2, column=2) 
+
+        widget = tk.Canvas(self, width=5, height=5, bg="black", highlightthickness=0) 
+        widget.grid(row=5, column=2, sticky="nsew") 
+
+        widget = tk.Canvas(self, width=5, height=5, bg="black", highlightthickness=0) 
+        widget.grid(row=2, column=5, sticky="nsew") 
+
 
 #page 3
 class Page3(BasePage):
