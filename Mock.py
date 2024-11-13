@@ -149,10 +149,6 @@ class Page2(BasePage):
 class Page3(BasePage):
     def __init__(self, parent, controller):
         super().__init__(parent, controller)
-
-        #label and positioning
-        label = ttk.Label(self, text="This is Page 3")
-        label.grid(row=0, column=0, columnspan=10, pady=10, sticky="nsew")
         
         # placeholders in 10x10 grid 
         for row in range(10): 
