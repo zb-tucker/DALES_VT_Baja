@@ -1,4 +1,5 @@
 import tkinter as tk
+#import matplotlib as plt
 from tkinter import ttk
 
 #window
@@ -16,7 +17,7 @@ class DalePositioning(tk.Tk):
         #binds configure event to on_resize
         self.bind("<Configure>", self.on_resize)
 
-        #creates frame, that fills all space
+        #creates frame, that fills all space 
         container = ttk.Frame(self)
         container.pack(expand=True, fill='both')
         container.grid_rowconfigure(0, weight=1)

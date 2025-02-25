@@ -41,7 +41,7 @@ class DalePositioning(tk.Tk):
             frame.grid(row=0, column=0, sticky="nsew")
 
         #shows page one
-        self.show_frame("Page1")
+        self.show_frame("Home")
     
     #retrieves frame from dictionary and brings to front
     def show_frame(self, page_name):
