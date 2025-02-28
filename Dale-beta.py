@@ -1,13 +1,21 @@
 from pathlib import Path
 import tkinter as tk
+import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
+from matplotlib.animation import FuncAnimation
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from tkinter import ttk, Canvas, Button, PhotoImage
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = Path(__file__).resolve().parent / "assets"
+SAMPLE_RATE = 1 #in MS
+
+
+
+
+
 root = tk.Tk()
 root.destroy()
 
@@ -47,6 +55,9 @@ class DalePositioning(tk.Tk):
 
     def stop_action(self):
         print("Stop button clicked")
+
+    def clear_action(self):
+        print("Clear button clicked")
 
 
 #base class for the pages
@@ -150,6 +161,16 @@ class Home(Header):
             relief="flat"
         )
         stopButton.place(x=125, y=40, width=120, height=35)
+
+        clearButton = Button(
+            self,
+            text="Clear",
+            borderwidth=1,
+            highlightthickness=1,
+            command=lambda: controller.clear_action(),
+            relief="flat"
+        )
+        clearButton.place(x=250, y=40, width=120, height=35)
         
         # button1 = tk.Button(self.button_frame, text="Start", command=controller.start_action)
         # button1.place(relx=0, y=35, relwidth=0.1, relheight=0.1)
@@ -160,27 +181,42 @@ class Home(Header):
 class Acceleration(Header):
     def __init__(self, parent, controller):
         super().__init__(parent, controller)
+
+        
         
         self.canvas = Canvas(self, bg="#CF4420")
         self.canvas.place(relx=0, y=35, relwidth=1, relheight=1)
 
 
-        fig = Figure(figsize=(5, 4), dpi=100)
-        ax = fig.add_subplot(111)
+        # Create a Figure and Axes for Matplotlib
+        self.fig = Figure(figsize=(5, 4), dpi=100)
+        self.ax = self.fig.add_subplot(111)
 
-        # Sample Data for the Graph
-        x = [1, 2, 3, 4, 5]
-        y = [10, 15, 7, 8, 12]
-        ax.plot(x, y, marker='o', linestyle='-')
+        # Styling
+        plt.style.use('fivethirtyeight')
 
-        ax.set_title("Acceleration Over Time")
-        ax.set_xlabel("Time (s)")
-        ax.set_ylabel("Acceleration (m/s^2)")
+        # Embed Matplotlib Figure into Tkinter
+        self.graph_canvas = FigureCanvasTkAgg(self.fig, self)
+        self.graph_canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
 
-        # Embed Matplotlib Figure into Tkinter Canvas
-        canvas = FigureCanvasTkAgg(fig, self)
-        canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
-        canvas.draw()
+        # Start animation
+        self.ani = FuncAnimation(self.fig, self.animate, interval=1000)
+
+    def animate(self, i):
+        """Update the graph dynamically."""
+        try:
+            data = pd.read_csv('data_out.csv')
+
+            self.ax.clear()  # Clear only the Axes, not the entire figure
+            self.ax.plot(data['time'], data['Acceleration'], label='Acceleration')
+
+            self.ax.legend(loc='upper left')
+            self.ax.set_title("Real-time Acceleration Data")
+
+            self.graph_canvas.draw()  # Update the Tkinter canvas
+
+        except Exception as e:
+            print(f"Error reading file: {e}")
 
 
 #page 3
