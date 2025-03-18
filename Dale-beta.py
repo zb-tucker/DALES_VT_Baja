@@ -178,6 +178,47 @@ class Home(Header):
                  
 
 #page 2
+class Speed(Header):
+    def __init__(self, parent, controller):
+        super().__init__(parent, controller)
+
+        
+        
+        self.canvas = Canvas(self, bg="#CF4420")
+        self.canvas.place(relx=0, y=35, relwidth=1, relheight=1)
+
+
+        # Create a Figure and Axes for Matplotlib
+        self.fig = Figure(figsize=(5, 4), dpi=100)
+        self.ax = self.fig.add_subplot(111)
+
+        # Styling
+        plt.style.use('fivethirtyeight')
+
+        # Embed Matplotlib Figure into Tkinter
+        self.graph_canvas = FigureCanvasTkAgg(self.fig, self)
+        self.graph_canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
+
+        # Start animation
+        self.ani = FuncAnimation(self.fig, self.animate, interval=500)
+
+    def animate(self, i):
+        """Update the graph dynamically."""
+        try:
+            data = pd.read_csv('data_out.csv')
+
+            self.ax.clear()  # Clear only the Axes, not the entire figure
+            self.ax.plot(data['time'], data['Speed'], label='Speed')
+
+            self.ax.legend(loc='upper left')
+            self.ax.set_title("Real-time Speed Data")
+
+            self.graph_canvas.draw()  # Update the Tkinter canvas
+
+        except Exception as e:
+            print(f"Error reading file: {e}")
+
+#page 3
 class Acceleration(Header):
     def __init__(self, parent, controller):
         super().__init__(parent, controller)
@@ -200,7 +241,7 @@ class Acceleration(Header):
         self.graph_canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
 
         # Start animation
-        self.ani = FuncAnimation(self.fig, self.animate, interval=1000)
+        self.ani = FuncAnimation(self.fig, self.animate, interval=500)
 
     def animate(self, i):
         """Update the graph dynamically."""
@@ -218,94 +259,91 @@ class Acceleration(Header):
         except Exception as e:
             print(f"Error reading file: {e}")
 
-
-#page 3
-class Speed(Header):
-    def __init__(self, parent, controller):
-        super().__init__(parent, controller)
-        
-        self.canvas = Canvas(self, bg="#CF4420")
-        self.canvas.place(relx=0, y=35, relwidth=1, relheight=1)
-
-        fig = Figure(figsize=(5, 4), dpi=100)
-        ax = fig.add_subplot(111)
-
-        # Sample Data for the Graph
-        x = [1, 2, 3, 4, 5]
-        y = [10, 15, 7, 8, 12]
-        ax.plot(x, y, marker='o', linestyle='-')
-
-        ax.set_title("Speed Over Time")
-        ax.set_xlabel("Time (s)")
-        ax.set_ylabel("Speed (m/s)")
-
-        # Embed Matplotlib Figure into Tkinter Canvas
-        canvas = FigureCanvasTkAgg(fig, self)
-        canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
-        canvas.draw()
-
 #page 4
 class Temperature(Header):
     def __init__(self, parent, controller):
         super().__init__(parent, controller)
 
+        
+        
         self.canvas = Canvas(self, bg="#CF4420")
         self.canvas.place(relx=0, y=35, relwidth=1, relheight=1)
 
-        fig = Figure(figsize=(5, 4), dpi=100)
-        ax = fig.add_subplot(111)
 
-        # Sample Data for the Graph
-        x = [1, 2, 3, 4, 5]
-        y = [10, 15, 7, 8, 12]
-        ax.plot(x, y, marker='o', linestyle='-')
+        # Create a Figure and Axes for Matplotlib
+        self.fig = Figure(figsize=(5, 4), dpi=100)
+        self.ax = self.fig.add_subplot(111)
 
-        ax.set_title("Tempurature Over Time")
-        ax.set_xlabel("Time (s)")
-        ax.set_ylabel("Temp. (C)")
+        # Styling
+        plt.style.use('fivethirtyeight')
 
-        # Embed Matplotlib Figure into Tkinter Canvas
-        canvas = FigureCanvasTkAgg(fig, self)
-        canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
-        canvas.draw()
+        # Embed Matplotlib Figure into Tkinter
+        self.graph_canvas = FigureCanvasTkAgg(self.fig, self)
+        self.graph_canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
+
+        # Start animation
+        self.ani = FuncAnimation(self.fig, self.animate, interval=500)
+
+    def animate(self, i):
+        """Update the graph dynamically."""
+        try:
+            data = pd.read_csv('data_out.csv')
+
+            self.ax.clear()  # Clear only the Axes, not the entire figure
+            self.ax.plot(data['time'], data['Temp'], label='Temperature')
+
+            self.ax.legend(loc='upper left')
+            self.ax.set_title("Real-time Temperature Data")
+
+            self.graph_canvas.draw()  # Update the Tkinter canvas
+
+        except Exception as e:
+            print(f"Error reading file: {e}")
 
 #page 5
 class Straingauges(Header):
     def __init__(self, parent, controller):
         super().__init__(parent, controller)
 
+        
+        
         self.canvas = Canvas(self, bg="#CF4420")
         self.canvas.place(relx=0, y=35, relwidth=1, relheight=1)
 
 
-        fig = Figure(figsize=(8, 4), dpi=100)  # Create the figure
+        # Create a Figure and Axes for Matplotlib
+        self.fig = Figure(figsize=(5, 4), dpi=100)
+        self.ax = self.fig.add_subplot(111)
 
-        # Create 4 subplots in a 4-row, 1-column layout
-        axes = [fig.add_subplot(4, 1, i + 1) for i in range(4)]
+        # Styling
+        plt.style.use('fivethirtyeight')
 
-        # Dummy data for each graph
-        data_x = [0, 1, 2, 3, 4, 5]
-        data_y = [
-            [10, 15, 20, 25, 30, 35],  # Graph 1
-            [5, 10, 15, 10, 5, 0],     # Graph 2
-            [3, 7, 2, 8, 6, 4],        # Graph 3
-            [12, 9, 15, 10, 5, 20]     # Graph 4
-        ]
-        titles = ["Bridge 1", "Bridge 2", "Bridge 3", "Bridge 4"]
+        # Embed Matplotlib Figure into Tkinter
+        self.graph_canvas = FigureCanvasTkAgg(self.fig, self)
+        self.graph_canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
 
-        # Plot each graph
-        for ax, y_values, title in zip(axes, data_y, titles):
-            ax.plot(data_x, y_values, marker="o", linestyle="-")
-            ax.set_title(title)
-            ax.grid(True)
+        # Start animation
+        self.ani = FuncAnimation(self.fig, self.animate, interval=500)
 
-        # Adjust spacing between subplots
-        fig.tight_layout()
+    def animate(self, i):
+        """Update the graph dynamically."""
+        try:
+            data = pd.read_csv('data_out.csv')
 
-        # Embed the figure into Tkinter Canvas
-        figure_canvas = FigureCanvasTkAgg(fig, master=self.canvas)
-        figure_canvas.draw()
-        figure_canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+            self.ax.clear()  # Clear only the Axes, not the entire figure
+            self.ax.plot(data['time'], data['Bridge1'], label='Bridge 1')
+            self.ax.plot(data['time'], data['Bridge2'], label='Bridge 2')
+            self.ax.plot(data['time'], data['Bridge3'], label='Bridge 3')
+            self.ax.plot(data['time'], data['Bridge4'], label='Bridge 4')
+
+            self.ax.legend(loc='upper left')
+            self.ax.set_title("Real-time Strain Gauge Data")
+
+            self.graph_canvas.draw()  # Update the Tkinter canvas
+
+        except Exception as e:
+            print(f"Error reading file: {e}")
+
 
 
 #page 6
