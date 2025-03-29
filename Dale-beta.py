@@ -2,6 +2,7 @@ from pathlib import Path
 import tkinter as tk
 import pandas as pd
 import matplotlib.pyplot as plt
+plt.style.use('fivethirtyeight')
 from matplotlib.figure import Figure
 from matplotlib.animation import FuncAnimation
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -50,8 +51,8 @@ class DalePositioning(tk.Tk):
         frame = self.frames[page_name]
         frame.tkraise()
 
-    def start_action(self):
-        print("Start button clicked")
+    def record_action(self):
+        print("Record button clicked")
 
     def stop_action(self):
         print("Stop button clicked")
@@ -66,7 +67,7 @@ class Header(ttk.Frame):
         super().__init__(parent)  # inherits from ttk.Frame
         self.controller = controller
 
-        self.home_button = PhotoImage(file=relative_to_assets("log_Button.png"))
+        self.home_button = PhotoImage(file=relative_to_assets("home_Button.png"))
         logButton = Button(
             self,
             image=self.home_button,
@@ -144,10 +145,10 @@ class Home(Header):
 
         startButton = Button(
             self,
-            text="Start",
+            text="Record",
             borderwidth=1,
             highlightthickness=1,
-            command=lambda: controller.start_action(),
+            command=lambda: controller.record_action(),
             relief="flat"
         )
         startButton.place(x=0, y=40, width=120, height=35)
@@ -175,9 +176,46 @@ class Home(Header):
         # button1 = tk.Button(self.button_frame, text="Start", command=controller.start_action)
         # button1.place(relx=0, y=35, relwidth=0.1, relheight=0.1)
 
-                 
-
 #page 2
+class Log(Header):
+    def __init__(self, parent, controller):
+        super().__init__(parent, controller)
+
+        
+        
+        self.canvas = Canvas(self, bg="#CF4420")
+        self.canvas.place(relx=0, y=35, relwidth=1, relheight=1)
+
+
+        # Create a Figure and Axes for Matplotlib
+        self.fig = Figure(figsize=(5, 4), dpi=100)
+        self.ax = self.fig.add_subplot(111)
+
+
+        # Embed Matplotlib Figure into Tkinter
+        self.graph_canvas = FigureCanvasTkAgg(self.fig, self)
+        self.graph_canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
+
+        # Start animation
+        self.ani = FuncAnimation(self.fig, self.animate, interval=500, cache_frame_data=False)
+
+    def animate(self, i):
+        """Update the graph dynamically."""
+        try:
+            data = pd.read_csv('data_out.csv')
+
+            self.ax.clear()  # Clear only the Axes, not the entire figure
+            self.ax.plot(data['time'], data['Speed'], label='Speed')
+
+            self.ax.legend(loc='upper left')
+            self.ax.set_title("Real-time Speed Data")
+
+            self.graph_canvas.draw()  # Update the Tkinter canvas
+
+        except Exception as e:
+            print(f"Error reading file: {e}")                
+
+#page 3
 class Speed(Header):
     def __init__(self, parent, controller):
         super().__init__(parent, controller)
@@ -192,15 +230,13 @@ class Speed(Header):
         self.fig = Figure(figsize=(5, 4), dpi=100)
         self.ax = self.fig.add_subplot(111)
 
-        # Styling
-        plt.style.use('fivethirtyeight')
 
         # Embed Matplotlib Figure into Tkinter
         self.graph_canvas = FigureCanvasTkAgg(self.fig, self)
         self.graph_canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
 
         # Start animation
-        self.ani = FuncAnimation(self.fig, self.animate, interval=500)
+        self.ani = FuncAnimation(self.fig, self.animate, interval=500, cache_frame_data=False)
 
     def animate(self, i):
         """Update the graph dynamically."""
@@ -218,7 +254,7 @@ class Speed(Header):
         except Exception as e:
             print(f"Error reading file: {e}")
 
-#page 3
+#page 4
 class Acceleration(Header):
     def __init__(self, parent, controller):
         super().__init__(parent, controller)
@@ -233,15 +269,13 @@ class Acceleration(Header):
         self.fig = Figure(figsize=(5, 4), dpi=100)
         self.ax = self.fig.add_subplot(111)
 
-        # Styling
-        plt.style.use('fivethirtyeight')
 
         # Embed Matplotlib Figure into Tkinter
         self.graph_canvas = FigureCanvasTkAgg(self.fig, self)
         self.graph_canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
 
         # Start animation
-        self.ani = FuncAnimation(self.fig, self.animate, interval=500)
+        self.ani = FuncAnimation(self.fig, self.animate, interval=500, cache_frame_data=False)
 
     def animate(self, i):
         """Update the graph dynamically."""
@@ -259,7 +293,7 @@ class Acceleration(Header):
         except Exception as e:
             print(f"Error reading file: {e}")
 
-#page 4
+#page 5
 class Temperature(Header):
     def __init__(self, parent, controller):
         super().__init__(parent, controller)
@@ -274,15 +308,13 @@ class Temperature(Header):
         self.fig = Figure(figsize=(5, 4), dpi=100)
         self.ax = self.fig.add_subplot(111)
 
-        # Styling
-        plt.style.use('fivethirtyeight')
 
         # Embed Matplotlib Figure into Tkinter
         self.graph_canvas = FigureCanvasTkAgg(self.fig, self)
         self.graph_canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
 
         # Start animation
-        self.ani = FuncAnimation(self.fig, self.animate, interval=500)
+        self.ani = FuncAnimation(self.fig, self.animate, interval=500, cache_frame_data=False)
 
     def animate(self, i):
         """Update the graph dynamically."""
@@ -300,7 +332,7 @@ class Temperature(Header):
         except Exception as e:
             print(f"Error reading file: {e}")
 
-#page 5
+#page 6
 class Straingauges(Header):
     def __init__(self, parent, controller):
         super().__init__(parent, controller)
@@ -315,15 +347,13 @@ class Straingauges(Header):
         self.fig = Figure(figsize=(5, 4), dpi=100)
         self.ax = self.fig.add_subplot(111)
 
-        # Styling
-        plt.style.use('fivethirtyeight')
 
         # Embed Matplotlib Figure into Tkinter
         self.graph_canvas = FigureCanvasTkAgg(self.fig, self)
         self.graph_canvas.get_tk_widget().place(x=0, y=35, relwidth=1, relheight=0.95)
 
         # Start animation
-        self.ani = FuncAnimation(self.fig, self.animate, interval=500)
+        self.ani = FuncAnimation(self.fig, self.animate, interval=500, cache_frame_data=False)
 
     def animate(self, i):
         """Update the graph dynamically."""
@@ -344,18 +374,6 @@ class Straingauges(Header):
         except Exception as e:
             print(f"Error reading file: {e}")
 
-
-
-#page 6
-class Log(Header):
-    def __init__(self, parent, controller):
-        super().__init__(parent, controller)
-
-        self.canvas = Canvas(self, bg="#CF4420")
-        self.canvas.place(relx=0, y=35, relwidth=1, relheight=1)
-
-        # Draw a rectangle (x1, y1, x2, y2)
-        self.rectangle = self.canvas.create_rectangle(50, 50, 200, 200, fill="blue")
 
 #main loop
 if __name__ == "__main__":
